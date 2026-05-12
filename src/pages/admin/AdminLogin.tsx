@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabaseClient";
 
@@ -26,7 +26,7 @@ export default function AdminLogin() {
       } else if (error) {
         console.warn("[AdminLogin] admin check error:", error);
       } else {
-        setMsg("เธเธฑเธเธเธตเธเธตเนเธฅเนเธญเธเธญเธดเธเธญเธขเธนเน เนเธ•เนเนเธกเนเนเธเน admin");
+        setMsg("บัญชีนี้ล็อกอินอยู่ แต่ไม่ใช่ admin");
       }
     })();
     return () => { alive = false; };
@@ -40,9 +40,9 @@ export default function AdminLogin() {
     try {
       if (mode === "password") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) { setMsg("เธญเธตเน€เธกเธฅเธซเธฃเธทเธญเธฃเธซเธฑเธชเธเนเธฒเธเนเธกเนเธ–เธนเธเธ•เนเธญเธ"); return; }
+        if (error) { setMsg("อีเมลหรือรหัสผ่านไม่ถูกต้อง"); return; }
         const { data: ok } = await supabase.rpc("is_admin");
-        if (!ok) { setMsg("เธเธฑเธเธเธตเธเธตเนเนเธกเนเธกเธตเธชเธดเธ—เธเธดเน admin"); await supabase.auth.signOut(); return; }
+        if (!ok) { setMsg("บัญชีนี้ไม่มีสิทธิ์ admin"); await supabase.auth.signOut(); return; }
         nav("/admin", { replace: true });
       } else {
         const { error } = await supabase.auth.signInWithOtp({
@@ -50,7 +50,7 @@ export default function AdminLogin() {
           options: { emailRedirectTo: `${window.location.origin}/admin` },
         });
         if (error) throw error;
-        setMsg("เธชเนเธเธฅเธดเธเธเนเน€เธเนเธฒเนเธเนเธเธฒเธเนเธเธ—เธตเนเธญเธตเน€เธกเธฅเนเธฅเนเธง");
+        setMsg("ส่งลิงก์เข้าใช้งานไปที่อีเมลแล้ว");
       }
     } catch (err) {
       console.error(err);
@@ -64,9 +64,6 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-zinc-50 grid place-items-center p-6">
       <div className="w-full max-w-md rounded-2xl border bg-white shadow-sm p-6">
         <div className="text-xl font-semibold">Admin Login</div>
-        <div className="text-sm text-zinc-600 mt-1">
-          เน€เธเนเธฒเธเนเธฒเธ URL เธ•เธฃเธ: <span className="font-mono">/admin</span>
-        </div>
 
         <div className="mt-4 flex gap-2">
           {(["password", "magic"] as LoginMode[]).map((m) => (
@@ -85,11 +82,11 @@ export default function AdminLogin() {
           <div>
             <label className="text-xs text-zinc-600">Email</label>
             <input
+              type="email"
+              autoComplete="email"
               className="mt-1 w-full rounded-xl border px-3 py-2"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              autoComplete="email"
               placeholder="you@email.com"
               required
             />
@@ -110,7 +107,7 @@ export default function AdminLogin() {
           )}
 
           <button disabled={busy} className="w-full rounded-xl bg-zinc-900 text-white py-2 hover:opacity-90 disabled:opacity-50">
-            {busy ? "Workingโ€ฆ" : "Login"}
+            {busy ? "Working…" : "Login"}
           </button>
 
           {msg ? <div className="rounded-xl border bg-zinc-50 p-3 text-sm text-zinc-700">{msg}</div> : null}
