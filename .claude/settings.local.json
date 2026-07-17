@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\VICTUS\\\\OneDrive\\\\Desktop\\\\LipVarietyWebsite\\\\src\" -Recurse | Where-Object { $_.Extension -in @\\('.tsx', '.ts', '.jsx', '.js', '.json', '.css'\\) } | Select-Object FullName | Sort-Object FullName)"
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\VICTUS\\\\OneDrive\\\\Desktop\\\\LipVarietyWebsite\\\\src\" -Recurse | Where-Object { $_.Extension -in @\\('.tsx', '.ts', '.jsx', '.js', '.json', '.css'\\) } | Select-Object FullName | Sort-Object FullName)",
+      "Bash(dir /b)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\VICTUS\\\\OneDrive\\\\Desktop\\\\LipVarietyWebsite\\\\src\" -Recurse | Where-Object { $_.PSIsContainer -or \\($_.Extension -in @\\('.tsx', '.ts', '.jsx', '.js', '.css', '.json'\\)\\) } | ForEach-Object { $_.FullName.Replace\\(\"c:\\\\Users\\\\VICTUS\\\\OneDrive\\\\Desktop\\\\LipVarietyWebsite\\\\\", \"\"\\) } | Sort-Object)"
     ]
   }
 }
