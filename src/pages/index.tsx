@@ -60,7 +60,7 @@ export default function Home() {
               </h1>
               <p className="mt-5 text-ink/70 text-lg max-w-xl leading-relaxed">
                 ทำควิซสั้น ๆ แล้วรับคำแนะนำ <b className="text-ink">Top 3 เฉด/รุ่น</b> ที่เข้ากับสีผิว โทนผิว
-                สภาพริมฝีปาก และโอกาสการใช้งานของคุณ
+                <br />สภาพริมฝีปาก และโอกาสการใช้งานของคุณ
               </p>
               <div className="mt-9 flex items-center gap-6">
                 <Link
@@ -134,7 +134,7 @@ export default function Home() {
               </p>
             </article>
             <article className="card p-6 hover:shadow-md transition">
-              <span className="inline-block h-2 w-10 rounded-full bg-gold mb-4" />
+              <span className="inline-block h-2 w-10 rounded-full bg-berry mb-4" />
               <h3 className="text-xl font-semibold text-ink">เลือกได้ตามโอกาส</h3>
               <p className="mt-2 text-ink/70 leading-relaxed">
                 ชีวิตประจำวัน, การทำงานที่ทำงาน, งานปาร์ตี้, ออกไปเที่ยว, และวันหยุด
