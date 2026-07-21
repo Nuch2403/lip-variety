@@ -53,20 +53,20 @@ export default function LipTypesList() {
     <div className="p-5 md:p-6">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <div className="text-xl font-semibold">Lip Types</div>
-          <div className="text-sm text-zinc-600 mt-1">จัดการประเภทลิปสติก รวมถึงชื่อ รูปภาพ ลำดับการแสดงผล</div>
+          <div className="font-display text-xl font-semibold text-ink">Lip Types</div>
+          <div className="text-sm text-taupe mt-1">จัดการประเภทลิปสติก รวมถึงชื่อ รูปภาพ ลำดับการแสดงผล</div>
         </div>
-        <Link to="/admin/lip-types/new" className="rounded-xl bg-zinc-900 text-white px-4 py-2 text-sm hover:opacity-90">+ Create</Link>
+        <Link to="/admin/lip-types/new" className="admin-btn-primary">+ Create</Link>
       </div>
 
       <div className="mt-4">
-        <input className="w-full rounded-xl border px-3 py-2" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search code / ชื่อ URL / name…" />
+        <input className="admin-input" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search code / ชื่อ URL / name…" />
       </div>
 
       <div className="mt-4 overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="text-left text-zinc-500">
-            <tr className="border-b">
+          <thead className="text-left text-taupe">
+            <tr className="border-b border-berry/10">
               <th className="py-2 pr-3">Order</th>
               <th className="py-2 pr-3">Image</th>
               <th className="py-2 pr-3">Code</th>
@@ -82,30 +82,30 @@ export default function LipTypesList() {
               const prev = filtered[idx - 1];
               const next = filtered[idx + 1];
               return (
-                <tr key={r.code} className="border-b">
+                <tr key={r.code} className="border-b border-berry/10">
                   <td className="py-3 pr-3">
                     <div className="flex items-center gap-2">
-                      <div className="font-mono text-xs">{r.sort_order ?? "—"}</div>
+                      <div className="font-mono text-xs text-taupe">{r.sort_order ?? "—"}</div>
                       <div className="flex gap-1">
-                        <button className="text-xs rounded-full border px-2 py-1 hover:bg-zinc-50 disabled:opacity-30" disabled={!prev} onClick={() => prev && swapOrder(r, prev)}>↑</button>
-                        <button className="text-xs rounded-full border px-2 py-1 hover:bg-zinc-50 disabled:opacity-30" disabled={!next} onClick={() => next && swapOrder(r, next)}>↓</button>
+                        <button className="admin-pill border-taupe/30 hover:bg-blush disabled:opacity-30" disabled={!prev} onClick={() => prev && swapOrder(r, prev)}>↑</button>
+                        <button className="admin-pill border-taupe/30 hover:bg-blush disabled:opacity-30" disabled={!next} onClick={() => next && swapOrder(r, next)}>↓</button>
                       </div>
                     </div>
                   </td>
                   <td className="py-3 pr-3">
-                    <div className="h-10 w-16 rounded-lg bg-zinc-100 overflow-hidden border">
+                    <div className="h-10 w-16 rounded-lg bg-blush overflow-hidden border border-berry/10">
                       {img ? <img src={img} className="h-full w-full object-cover" alt="" /> : null}
                     </div>
                   </td>
-                  <td className="py-3 pr-3 font-mono text-xs">{String(r.code)}</td>
-                  <td className="py-3 pr-3 font-mono text-xs">{r.slug}</td>
+                  <td className="py-3 pr-3 font-mono text-xs text-taupe">{String(r.code)}</td>
+                  <td className="py-3 pr-3 font-mono text-xs text-taupe">{r.slug}</td>
                   <td className="py-3 pr-3">
-                    <div className="font-medium">{r.name_th}</div>
-                    <div className="text-xs text-zinc-500">{r.name_en}</div>
+                    <div className="font-medium text-ink">{r.name_th}</div>
+                    <div className="text-xs text-taupe">{r.name_en}</div>
                   </td>
                   <td className="py-3 pr-3">
                     <button
-                      className={["text-xs rounded-full border px-3 py-1", r.is_published ? "bg-emerald-50 border-emerald-200" : "bg-zinc-50"].join(" ")}
+                      className={["admin-pill", r.is_published ? "bg-emerald-50 border-emerald-200 text-emerald-800" : "bg-blush border-taupe/20 text-taupe"].join(" ")}
                       onClick={() => togglePublish(r)}
                     >
                       {r.is_published ? "Published" : "Draft"}
@@ -113,14 +113,14 @@ export default function LipTypesList() {
                   </td>
                   <td className="py-3 pr-3">
                     <div className="flex items-center gap-2">
-                      <Link className="text-xs underline" to={`/admin/lip-types/${r.code}`}>Edit</Link>
-                      <a className="text-xs underline text-zinc-600" href={`/type/${r.slug}`} target="_blank" rel="noreferrer">View →</a>
+                      <Link className="text-xs text-berry hover:underline" to={`/admin/lip-types/${r.code}`}>Edit</Link>
+                      <a className="text-xs text-taupe hover:underline" href={`/type/${r.slug}`} target="_blank" rel="noreferrer">View →</a>
                     </div>
                   </td>
                 </tr>
               );
             })}
-            {!filtered.length ? <tr><td colSpan={7} className="py-8 text-center text-zinc-500">No lip types found</td></tr> : null}
+            {!filtered.length ? <tr><td colSpan={7} className="py-8 text-center text-taupe">No lip types found</td></tr> : null}
           </tbody>
         </table>
       </div>

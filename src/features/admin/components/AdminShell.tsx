@@ -19,25 +19,22 @@ export default function AdminShell() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900">
+    <div className="admin-shell">
       <div className="mx-auto max-w-7xl p-4 md:p-6">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-[260px_1fr]">
-          <aside className="rounded-2xl border bg-white shadow-sm">
-            <div className="p-4 border-b">
-              <div className="text-lg font-semibold">LipVariety Admin</div>
+          <aside className="admin-panel h-fit">
+            <div className="p-4 border-b border-berry/10">
+              <div className="font-display text-lg font-semibold text-berry">LipVariety Admin</div>
             </div>
 
-            <nav className="p-2">
+            <nav className="p-2 space-y-0.5">
               {navItems.map((item) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   end={item.to === "/admin"}
                   className={({ isActive }) =>
-                    [
-                      "block rounded-xl px-3 py-2 text-sm transition",
-                      isActive ? "bg-zinc-900 text-white" : "hover:bg-zinc-100",
-                    ].join(" ")
+                    ["admin-nav-item", isActive ? "admin-nav-item-active" : "admin-nav-item-idle"].join(" ")
                   }
                 >
                   {item.label}
@@ -45,9 +42,9 @@ export default function AdminShell() {
               ))}
             </nav>
 
-            <div className="p-3 border-t flex items-center justify-between">
+            <div className="p-3 border-t border-berry/10 flex items-center justify-between">
               <a
-                className="text-xs underline text-zinc-600"
+                className="text-xs text-berry hover:underline"
                 href="/"
                 target="_blank"
                 rel="noreferrer"
@@ -55,7 +52,7 @@ export default function AdminShell() {
                 เปิดหน้าเว็บ →
               </a>
               <button
-                className="text-xs rounded-full border px-3 py-1 hover:bg-zinc-50"
+                className="admin-pill border-taupe/30 hover:bg-blush"
                 onClick={logout}
               >
                 ออกจากระบบ
@@ -63,7 +60,7 @@ export default function AdminShell() {
             </div>
           </aside>
 
-          <main className="rounded-2xl border bg-white shadow-sm">
+          <main className="admin-panel">
             <Outlet />
           </main>
         </div>

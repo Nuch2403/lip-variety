@@ -36,8 +36,8 @@ export default function Callback() {
 
   return (
     <div className="min-h-[50vh] grid place-items-center p-6">
-      <div className="rounded-2xl border border-zinc-200 bg-white px-6 py-8 shadow-sm">
-        <div className="text-zinc-700">{msg}</div>
+      <div className="card px-6 py-8">
+        <div className="text-ink/80">{msg}</div>
       </div>
     </div>
   );

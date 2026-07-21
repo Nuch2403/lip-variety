@@ -7,8 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: { DEFAULT: '#991b1b' }
-      }
+        ink: "#241016",
+        berry: { DEFAULT: "#7A1030", dark: "#4F0A20" },
+        blush: "#F7E7E2",
+        cream: "#FFFBF7",
+        gold: "#B9873F",
+        taupe: "#75635F",
+      },
+      fontFamily: {
+        display: ['"Trirong"', "ui-serif", "Georgia", "serif"],
+        body: ['"IBM Plex Sans Thai"', "ui-sans-serif", "system-ui"],
+      },
     }
   },
   plugins: []

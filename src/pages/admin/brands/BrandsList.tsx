@@ -33,16 +33,16 @@ export default function BrandsList() {
     <div className="p-5 md:p-6">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-xl font-semibold">Brands</div>
-          <div className="text-sm text-zinc-600 mt-1">จัดการข้อมูลแบรนด์ที่ใช้เชื่อมกับสินค้าในระบบ</div>
+          <div className="font-display text-xl font-semibold text-ink">Brands</div>
+          <div className="text-sm text-taupe mt-1">จัดการข้อมูลแบรนด์ที่ใช้เชื่อมกับสินค้าในระบบ</div>
         </div>
-        <Link to="/admin/brands/new" className="rounded-xl bg-zinc-900 text-white px-4 py-2 text-sm">
+        <Link to="/admin/brands/new" className="admin-btn-primary">
           + Create
         </Link>
       </div>
 
       <input
-        className="mt-4 w-full rounded-xl border px-3 py-2"
+        className="admin-input mt-4"
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder="Search…"
@@ -52,18 +52,18 @@ export default function BrandsList() {
         {filtered.map((b) => {
           const logo = b.logo_path ? toPublicUrl(b.logo_path) : "";
           return (
-            <Link key={b.id} to={`/admin/brands/${b.id}`} className="rounded-2xl border p-4 hover:shadow-sm transition">
+            <Link key={b.id} to={`/admin/brands/${b.id}`} className="admin-panel p-4 hover:shadow-md transition block">
               <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-xl border bg-zinc-100 overflow-hidden">
+                <div className="h-12 w-12 rounded-lg border border-berry/10 bg-blush overflow-hidden">
                   {logo ? <img src={logo} className="h-full w-full object-cover" alt="" /> : null}
                 </div>
-                <div className="font-medium">{b.name}</div>
+                <div className="font-medium text-ink">{b.name}</div>
               </div>
             </Link>
           );
         })}
       </div>
-      {!filtered.length ? <div className="py-10 text-center text-sm text-zinc-500">No brands found</div> : null}
+      {!filtered.length ? <div className="py-10 text-center text-sm text-taupe">No brands found</div> : null}
     </div>
   );
 }

@@ -88,17 +88,17 @@ export default function TypeDetail() {
     return () => { alive = false; };
   }, [slug, candidates, navigate]);
 
-  if (loading) return <div className="container-page py-10 text-center">กำลังโหลด…</div>;
+  if (loading) return <div className="container-page section text-center text-ink/70">กำลังโหลด…</div>;
 
   if (notFound || !meta) {
     return (
-      <div className="container-page py-10">
-        <div className="rounded-2xl border bg-amber-50 p-5 text-amber-900">
+      <div className="container-page section">
+        <div className="rounded-xl border border-gold/30 bg-blush p-5 text-berry">
           <div className="font-semibold mb-1">ไม่พบข้อมูลประเภทลิป</div>
           <div className="text-sm opacity-90">URL: <span className="font-mono">{String(slug)}</span></div>
         </div>
         <div className="mt-5">
-          <Link className="underline" to="/type-of-lipstick">← กลับไปหน้ารวมประเภทลิป</Link>
+          <Link className="btn-ghost" to="/type-of-lipstick">← กลับไปหน้ารวมประเภทลิป</Link>
         </div>
       </div>
     );
@@ -107,12 +107,12 @@ export default function TypeDetail() {
   const img = meta.image_path ? toPublicUrl(meta.image_path) : "";
 
   return (
-    <div className="container-page py-10">
-      <Link className="text-sm underline" to="/type-of-lipstick">← กลับไปหน้ารวมประเภทลิป</Link>
+    <div className="container-page section">
+      <Link className="btn-ghost text-sm" to="/type-of-lipstick">← กลับไปหน้ารวมประเภทลิป</Link>
 
-      <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="rounded-2xl overflow-hidden border bg-white">
-          <div className="aspect-[16/10] bg-zinc-100">
+      <div className="mt-4 grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div className="card overflow-hidden">
+          <div className="aspect-[16/10] bg-blush">
             {img ? (
               <img
                 src={img}
@@ -125,17 +125,17 @@ export default function TypeDetail() {
         </div>
 
         <div>
-          <h1 className="text-2xl font-bold">{meta.name_th}</h1>
-          <div className="text-zinc-600">{meta.name_en}</div>
+          <h1 className="font-display text-2xl sm:text-3xl font-semibold text-ink">{meta.name_th}</h1>
+          <div className="text-taupe">{meta.name_en}</div>
 
-          <div className="mt-4 space-y-3 text-zinc-800 leading-relaxed">
+          <div className="mt-4 space-y-3 text-ink/80 leading-relaxed">
             {meta.short_desc_th ? (
               <p>{meta.short_desc_th}</p>
             ) : (
-              <p className="text-zinc-600">ยังไม่มีรายละเอียดในส่วนข้อมูล (short_desc_th)</p>
+              <p className="text-taupe">ยังไม่มีรายละเอียดในส่วนข้อมูล (short_desc_th)</p>
             )}
             {meta.short_desc_en ? (
-              <p className="text-sm text-zinc-600">{meta.short_desc_en}</p>
+              <p className="text-sm text-taupe">{meta.short_desc_en}</p>
             ) : null}
           </div>
         </div>

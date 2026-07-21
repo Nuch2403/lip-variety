@@ -3,31 +3,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== Base (รีเซ็ตเล็กน้อย + ฟอนต์) ===== */
+/* ===== Base ===== */
 @layer base {
-  :root {
-    /* โทนสีแบรนด์ (แดงไวน์) */
-    --brand-900: #5e0b0b;
-    --brand-800: #7a0f0f;
-    --brand-700: #8f1111;
-    --brand-600: #a51414;
-    --brand-100: #f4e3e3;
-  }
-
   html, body, #root {
     height: 100%;
   }
 
   body {
-    @apply antialiased text-zinc-900 bg-white;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-      Roboto, "Noto Sans Thai", "Helvetica Neue", Arial, "Apple Color Emoji",
+    @apply antialiased text-ink bg-cream;
+    font-family: "IBM Plex Sans Thai", ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+
+  h1, h2, h3 {
+    font-family: "Trirong", "IBM Plex Sans Thai", ui-serif, Georgia, serif;
   }
 
   /* โฟกัสชัดเจนสำหรับคีย์บอร์ด */
   :focus-visible {
-    @apply outline-none ring-2 ring-offset-2 ring-offset-white ring-red-700;
+    @apply outline-none ring-2 ring-offset-2 ring-offset-cream ring-gold;
   }
 }
 
@@ -38,38 +33,85 @@
   }
 
   .card {
-    @apply rounded-2xl bg-white shadow-md border border-zinc-200;
+    @apply rounded-xl bg-white border border-berry/10 shadow-[0_1px_3px_rgba(36,16,22,0.06)];
+  }
+
+  .card-selected {
+    @apply ring-2 ring-gold border-gold/40 bg-blush/50;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5
-           text-base font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center rounded-full px-6 py-2.5
+           text-base font-semibold tracking-tight transition disabled:opacity-40 disabled:cursor-not-allowed;
   }
   .btn-primary {
-    @apply btn text-white;
-    background: var(--brand-700);
+    @apply btn bg-berry text-cream shadow-sm;
   }
-  .btn-primary:hover {
-    background: var(--brand-800);
+  .btn-primary:hover:not(:disabled) {
+    @apply bg-berry-dark;
   }
 
   .btn-ghost {
-    @apply btn text-zinc-800 bg-transparent hover:bg-zinc-100;
+    @apply inline-flex items-center justify-center gap-1 px-2 py-2 text-base font-medium
+           text-ink border-b border-transparent hover:border-berry transition disabled:opacity-40;
   }
 
   .section {
-    @apply py-10 sm:py-14;
+    @apply py-12 sm:py-16;
   }
 
   .hero {
-    background: var(--brand-700);
-    color: white;
+    @apply bg-gradient-to-b from-blush to-cream;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium
+           bg-blush text-berry tracking-wide;
+  }
+
+  /* ===== Admin (denser "work" variant of the same token family) ===== */
+  .admin-shell {
+    @apply min-h-screen bg-blush/40 text-ink;
+  }
+  .admin-panel {
+    @apply rounded-xl border border-berry/10 bg-white shadow-sm;
+  }
+  .admin-nav-item {
+    @apply block rounded-lg px-3 py-2 text-sm font-medium transition;
+  }
+  .admin-nav-item-active {
+    @apply bg-berry text-cream;
+  }
+  .admin-nav-item-idle {
+    @apply text-ink hover:bg-blush;
+  }
+  .admin-label {
+    @apply text-xs text-taupe;
+  }
+  .admin-input {
+    @apply w-full rounded-lg border border-taupe/30 bg-white px-3 py-2 text-sm
+           focus:border-berry focus:outline-none focus:ring-1 focus:ring-berry;
+  }
+  .admin-btn {
+    @apply rounded-lg px-4 py-2 text-sm font-medium transition;
+  }
+  .admin-btn-primary {
+    @apply admin-btn bg-berry text-cream hover:bg-berry-dark;
+  }
+  .admin-btn-ghost {
+    @apply admin-btn border border-taupe/30 text-ink hover:bg-blush;
+  }
+  .admin-pill {
+    @apply text-xs rounded-full border px-3 py-1 transition;
+  }
+  .admin-modal {
+    @apply w-[360px] max-w-[90vw] rounded-xl bg-white shadow-2xl border border-berry/10 p-5;
   }
 }
 
 /* ===== Utilities เพิ่มเติมสำหรับแบรนด์ ===== */
 @layer utilities {
-  .bg-brand   { background-color: var(--brand-700); }
-  .bg-brand-100 { background-color: var(--brand-100); }
-  .text-brand { color: var(--brand-700); }
+  .font-display {
+    font-family: "Trirong", "IBM Plex Sans Thai", ui-serif, Georgia, serif;
+  }
 }

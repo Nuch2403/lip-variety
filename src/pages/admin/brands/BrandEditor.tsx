@@ -122,24 +122,24 @@ export default function BrandEditor() {
   return (
     <div className="p-5 md:p-6">
       <div className="flex items-center justify-between">
-        <div className="text-xl font-semibold">{isNew ? "Create Brand" : "Edit Brand"}</div>
-        <Link className="text-sm underline" to="/admin/brands">← Back</Link>
+        <div className="font-display text-xl font-semibold text-ink">{isNew ? "Create Brand" : "Edit Brand"}</div>
+        <Link className="text-sm text-berry hover:underline" to="/admin/brands">← Back</Link>
       </div>
 
       <form className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-[1fr_420px]" onSubmit={save}>
-        <div className="rounded-2xl border p-4 space-y-3">
+        <div className="admin-panel p-4 space-y-3">
           <div>
-            <label className="text-xs text-zinc-600">name</label>
-            <input className="mt-1 w-full rounded-xl border px-3 py-2" value={form.name} onChange={(e) => set("name", e.target.value)} />
+            <label className="admin-label">name</label>
+            <input className="admin-input mt-1" value={form.name} onChange={(e) => set("name", e.target.value)} />
           </div>
           <div>
-            <label className="text-xs text-zinc-600">ชื่อ URL</label>
-            <input className="mt-1 w-full rounded-xl border px-3 py-2 font-mono" value={form.slug} onChange={(e) => set("slug", e.target.value)} />
-            <p className="text-[11px] text-zinc-500 mt-1">เปลี่ยนชื่อ URL (slug) ได้ ระบบจะ redirect จากของเก่าไปใหม่ให้อัตโนมัติ</p>
+            <label className="admin-label">ชื่อ URL</label>
+            <input className="admin-input mt-1 font-mono" value={form.slug} onChange={(e) => set("slug", e.target.value)} />
+            <p className="text-[11px] text-taupe mt-1">เปลี่ยนชื่อ URL (slug) ได้ ระบบจะ redirect จากของเก่าไปใหม่ให้อัตโนมัติ</p>
           </div>
           <div className="flex gap-2">
-            <button className="rounded-xl bg-zinc-900 text-white px-4 py-2 text-sm">Save</button>
-            {!isNew ? <button type="button" className="rounded-xl border px-4 py-2 text-sm" onClick={del}>Delete</button> : null}
+            <button className="admin-btn-primary">Save</button>
+            {!isNew ? <button type="button" className="admin-btn-ghost" onClick={del}>Delete</button> : null}
           </div>
         </div>
 
@@ -150,12 +150,12 @@ export default function BrandEditor() {
       <ConfirmModal open={confirmState.open} message={confirmState.message} onCancel={() => setConfirmState((s) => ({ ...s, open: false }))} onConfirm={confirmState.onConfirm!} confirmText="ลบแบรนด์" />
 
       {showPrompt ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="w-[360px] max-w-[90vw] rounded-2xl bg-white shadow-2xl border border-zinc-200 p-5">
-            <div className="text-lg font-semibold text-zinc-900">{promptMessage}</div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-sm">
+          <div className="admin-modal">
+            <div className="text-lg font-semibold text-ink">{promptMessage}</div>
             <div className="mt-4 flex justify-end gap-2">
-              <button className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-800 hover:bg-zinc-50" onClick={stayHere}>อยู่ต่อ</button>
-              <button className="rounded-full bg-zinc-900 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-black" onClick={proceedNavigation}>ออกจากหน้านี้</button>
+              <button className="admin-btn-ghost" onClick={stayHere}>อยู่ต่อ</button>
+              <button className="admin-btn-primary" onClick={proceedNavigation}>ออกจากหน้านี้</button>
             </div>
           </div>
         </div>

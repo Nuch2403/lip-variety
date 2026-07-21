@@ -120,29 +120,29 @@ export default function FinishEditor() {
   return (
     <div className="p-5 md:p-6 space-y-4">
       <div className="flex items-center justify-between gap-3">
-        <div className="text-xl font-semibold">{isNew ? "Create Finish" : "Edit Finish"}</div>
-        <Link className="text-sm underline" to="/admin/finishes">← Back</Link>
+        <div className="font-display text-xl font-semibold text-ink">{isNew ? "Create Finish" : "Edit Finish"}</div>
+        <Link className="text-sm text-berry hover:underline" to="/admin/finishes">← Back</Link>
       </div>
 
-      <form className="rounded-2xl border p-4 space-y-3" onSubmit={save}>
+      <form className="admin-panel p-4 space-y-3" onSubmit={save}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-zinc-600">name</label>
-            <input className="mt-1 w-full rounded-xl border px-3 py-2" value={form.name} onChange={(e) => setField("name", e.target.value)} />
+            <label className="admin-label">name</label>
+            <input className="admin-input mt-1" value={form.name} onChange={(e) => setField("name", e.target.value)} />
           </div>
           <div>
-            <label className="text-xs text-zinc-600">ชื่อ URL</label>
-            <input className="mt-1 w-full rounded-xl border px-3 py-2 font-mono" value={form.slug} onChange={(e) => setField("slug", e.target.value)} placeholder="e.g. satin" />
-            <p className="text-[11px] text-zinc-500 mt-1">ใช้ตัวพิมพ์เล็ก a-z 0-9 และขีดกลางเท่านั้น</p>
+            <label className="admin-label">ชื่อ URL</label>
+            <input className="admin-input mt-1 font-mono" value={form.slug} onChange={(e) => setField("slug", e.target.value)} placeholder="e.g. satin" />
+            <p className="text-[11px] text-taupe mt-1">ใช้ตัวพิมพ์เล็ก a-z 0-9 และขีดกลางเท่านั้น</p>
           </div>
-          <label className="text-xs text-zinc-600 inline-flex items-center gap-2 mt-6 md:mt-7">
-            <input type="checkbox" className="mr-2" checked={!!form.is_active} onChange={(e) => setField("is_active", e.target.checked)} />
+          <label className="admin-label inline-flex items-center gap-2 mt-6 md:mt-7">
+            <input type="checkbox" className="mr-2 accent-berry" checked={!!form.is_active} onChange={(e) => setField("is_active", e.target.checked)} />
             Active
           </label>
         </div>
         <div className="flex gap-2">
-          <button className="rounded-xl bg-zinc-900 text-white px-4 py-2 text-sm">Save</button>
-          {!isNew ? <button type="button" className="rounded-xl border px-4 py-2 text-sm" onClick={del}>Delete</button> : null}
+          <button className="admin-btn-primary">Save</button>
+          {!isNew ? <button type="button" className="admin-btn-ghost" onClick={del}>Delete</button> : null}
         </div>
       </form>
 
@@ -150,12 +150,12 @@ export default function FinishEditor() {
       <ConfirmModal open={confirmState.open} message={confirmState.message} onCancel={() => setConfirmState((s) => ({ ...s, open: false }))} onConfirm={confirmState.onConfirm!} confirmText="ลบ finish" />
 
       {showPrompt ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="w-[360px] max-w-[90vw] rounded-2xl bg-white shadow-2xl border border-zinc-200 p-5">
-            <div className="text-lg font-semibold text-zinc-900">{promptMessage}</div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-sm">
+          <div className="admin-modal">
+            <div className="text-lg font-semibold text-ink">{promptMessage}</div>
             <div className="mt-4 flex justify-end gap-2">
-              <button className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-800 hover:bg-zinc-50" onClick={stayHere}>อยู่ต่อ</button>
-              <button className="rounded-full bg-zinc-900 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-black" onClick={proceedNavigation}>ออกจากหน้านี้</button>
+              <button className="admin-btn-ghost" onClick={stayHere}>อยู่ต่อ</button>
+              <button className="admin-btn-primary" onClick={proceedNavigation}>ออกจากหน้านี้</button>
             </div>
           </div>
         </div>

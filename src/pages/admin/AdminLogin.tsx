@@ -61,16 +61,16 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 grid place-items-center p-6">
-      <div className="w-full max-w-md rounded-2xl border bg-white shadow-sm p-6">
-        <div className="text-xl font-semibold">Admin Login</div>
+    <div className="admin-shell grid place-items-center p-6">
+      <div className="w-full max-w-md admin-panel p-6">
+        <div className="font-display text-xl font-semibold text-berry">Admin Login</div>
 
         <div className="mt-4 flex gap-2">
           {(["password", "magic"] as LoginMode[]).map((m) => (
             <button
               key={m}
               type="button"
-              className={["flex-1 rounded-xl border px-3 py-2 text-sm", mode === m ? "bg-zinc-900 text-white" : "hover:bg-zinc-50"].join(" ")}
+              className={["flex-1 rounded-lg border px-3 py-2 text-sm transition", mode === m ? "bg-berry text-cream border-berry" : "border-taupe/30 hover:bg-blush text-ink"].join(" ")}
               onClick={() => setMode(m)}
             >
               {m === "password" ? "Password" : "Magic Link"}
@@ -80,11 +80,11 @@ export default function AdminLogin() {
 
         <form className="mt-4 space-y-3" onSubmit={submit}>
           <div>
-            <label className="text-xs text-zinc-600">Email</label>
+            <label className="admin-label">Email</label>
             <input
               type="email"
               autoComplete="email"
-              className="mt-1 w-full rounded-xl border px-3 py-2"
+              className="admin-input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@email.com"
@@ -94,11 +94,11 @@ export default function AdminLogin() {
 
           {mode === "password" && (
             <div>
-              <label className="text-xs text-zinc-600">Password</label>
+              <label className="admin-label">Password</label>
               <input
                 type="password"
                 autoComplete="current-password"
-                className="mt-1 w-full rounded-xl border px-3 py-2"
+                className="admin-input"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -106,11 +106,11 @@ export default function AdminLogin() {
             </div>
           )}
 
-          <button disabled={busy} className="w-full rounded-xl bg-zinc-900 text-white py-2 hover:opacity-90 disabled:opacity-50">
+          <button disabled={busy} className="w-full admin-btn-primary py-2 disabled:opacity-50">
             {busy ? "Working…" : "Login"}
           </button>
 
-          {msg ? <div className="rounded-xl border bg-zinc-50 p-3 text-sm text-zinc-700">{msg}</div> : null}
+          {msg ? <div className="rounded-lg border border-taupe/20 bg-blush/60 p-3 text-sm text-ink">{msg}</div> : null}
         </form>
       </div>
     </div>

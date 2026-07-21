@@ -30,27 +30,28 @@ export default function Step2Undertone() {
 
   return (
     <div className="container-page section">
-      <h1 className="text-2xl font-bold mb-3">STEP 2/5 — Undertone อุณหภูมิใต้ผิว</h1>
-      <p className="text-zinc-600 mb-6">ไม่แน่ใจ? กด <b>ไม่แน่ใจ</b> เพื่ออ่านวิธีดู Undertone เพิ่มเติม</p>
+      <span className="eyebrow">STEP 2/5</span>
+      <h1 className="mt-3 font-display text-2xl sm:text-3xl font-semibold text-ink mb-2">Undertone อุณหภูมิใต้ผิว</h1>
+      <p className="text-taupe mb-6">ไม่แน่ใจ? กด <b className="text-ink">ไม่แน่ใจ</b> เพื่ออ่านวิธีดู Undertone เพิ่มเติม</p>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {OPTIONS.map((o) => (
           <label
             key={o.code}
-            className={`card p-5 cursor-pointer transition ${val === o.code ? "ring-2 ring-red-700" : "hover:shadow-lg"}`}
+            className={`card p-5 cursor-pointer transition ${val === o.code ? "card-selected" : "hover:shadow-md"}`}
           >
             <div className="flex items-start gap-4">
-              <img src={o.image} alt={o.label} className="h-20 w-20 rounded-md object-cover border border-zinc-200" />
+              <img src={o.image} alt={o.label} className="h-28 w-20 shrink-0 rounded-lg object-contain bg-blush border border-berry/10" />
               <input
                 type="radio"
                 name="undertone"
-                className="h-5 w-5 accent-red-700 mt-1"
+                className="h-5 w-5 accent-berry mt-1"
                 checked={val === o.code}
                 onChange={() => setVal(o.code)}
               />
               <div>
-                <span className="text-lg font-medium block">{o.label}</span>
-                <p className="text-sm text-zinc-500 mt-1 leading-snug">{o.desc}</p>
+                <span className="text-lg font-medium block text-ink">{o.label}</span>
+                <p className="text-sm text-taupe mt-1 leading-snug">{o.desc}</p>
               </div>
             </div>
           </label>
@@ -58,8 +59,8 @@ export default function Step2Undertone() {
       </div>
 
       <div className="mt-8 flex items-center justify-between gap-3">
-        <button className="btn-ghost" onClick={() => nav(-1)}>ย้อนกลับ</button>
-        <div className="flex items-center gap-2">
+        <button className="btn-ghost" onClick={() => nav(-1)}>← ย้อนกลับ</button>
+        <div className="flex items-center gap-4">
           <Link to="/undertone" className="btn-ghost">ไม่แน่ใจ</Link>
           <button className="btn-primary" disabled={!val} onClick={next}>ไปขั้นถัดไป</button>
         </div>

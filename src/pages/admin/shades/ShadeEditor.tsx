@@ -155,17 +155,17 @@ export default function ShadeEditor() {
     <div className="p-5 md:p-6 space-y-4">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <div className="text-xl font-semibold">{isNew ? "Create Shade" : "Edit Shade"}</div>
-          <div className="text-sm text-zinc-600">Bind shade to product + undertone/depth tags</div>
+          <div className="font-display text-xl font-semibold text-ink">{isNew ? "Create Shade" : "Edit Shade"}</div>
+          <div className="text-sm text-taupe">Bind shade to product + undertone/depth tags</div>
         </div>
-        <Link className="text-sm underline" to="/admin/shades">← Back</Link>
+        <Link className="text-sm text-berry hover:underline" to="/admin/shades">← Back</Link>
       </div>
 
       <form className="grid grid-cols-1 gap-4" onSubmit={save}>
-        <div className="space-y-3 rounded-2xl border p-4">
+        <div className="space-y-3 admin-panel p-4">
           <div>
-            <label className="text-xs text-zinc-600">product</label>
-            <select className="mt-1 w-full rounded-xl border px-3 py-2" value={form.product_id} onChange={(e) => setField("product_id", e.target.value)} required>
+            <label className="admin-label">product</label>
+            <select className="admin-input mt-1" value={form.product_id} onChange={(e) => setField("product_id", e.target.value)} required>
               <option value="">Select product…</option>
               {products.map((p) => <option key={p.id} value={p.id}>{p.model}</option>)}
             </select>
@@ -173,23 +173,23 @@ export default function ShadeEditor() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label className="text-xs text-zinc-600">shade_name</label>
-              <input className="mt-1 w-full rounded-xl border px-3 py-2" value={form.shade_name} onChange={(e) => setField("shade_name", e.target.value)} required />
+              <label className="admin-label">shade_name</label>
+              <input className="admin-input mt-1" value={form.shade_name} onChange={(e) => setField("shade_name", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs text-zinc-600">shade_code</label>
-              <input className="mt-1 w-full rounded-xl border px-3 py-2" value={form.shade_code} onChange={(e) => setField("shade_code", e.target.value)} placeholder="optional" />
+              <label className="admin-label">shade_code</label>
+              <input className="admin-input mt-1" value={form.shade_code} onChange={(e) => setField("shade_code", e.target.value)} placeholder="optional" />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
-              <label className="text-xs text-zinc-600">hex</label>
-              <input className="mt-1 w-full rounded-xl border px-3 py-2 font-mono" value={form.hex} onChange={(e) => setField("hex", e.target.value)} placeholder="#RRGGBB" />
+              <label className="admin-label">hex</label>
+              <input className="admin-input mt-1 font-mono" value={form.hex} onChange={(e) => setField("hex", e.target.value)} placeholder="#RRGGBB" />
             </div>
             <div>
-              <label className="text-xs text-zinc-600">Undertone</label>
-              <select className="mt-1 w-full rounded-xl border px-3 py-2" value={form.undertone_tag} onChange={(e) => setField("undertone_tag", e.target.value)}>
+              <label className="admin-label">Undertone</label>
+              <select className="admin-input mt-1" value={form.undertone_tag} onChange={(e) => setField("undertone_tag", e.target.value)}>
                 <option value="">Undertone</option>
                 <option value="warm">warm</option>
                 <option value="cool">cool</option>
@@ -197,8 +197,8 @@ export default function ShadeEditor() {
               </select>
             </div>
             <div>
-              <label className="text-xs text-zinc-600">depth_tag</label>
-              <select className="mt-1 w-full rounded-xl border px-3 py-2" value={form.depth_tag} onChange={(e) => setField("depth_tag", e.target.value)}>
+              <label className="admin-label">depth_tag</label>
+              <select className="admin-input mt-1" value={form.depth_tag} onChange={(e) => setField("depth_tag", e.target.value)}>
                 <option value="">Depth</option>
                 <option value="light">light</option>
                 <option value="medium">medium</option>
@@ -207,14 +207,14 @@ export default function ShadeEditor() {
             </div>
           </div>
 
-          <label className="text-xs text-zinc-600 inline-flex items-center gap-2">
-            <input type="checkbox" className="mr-2" checked={!!form.is_discontinued} onChange={(e) => setField("is_discontinued", e.target.checked)} />
+          <label className="admin-label inline-flex items-center gap-2">
+            <input type="checkbox" className="mr-2 accent-berry" checked={!!form.is_discontinued} onChange={(e) => setField("is_discontinued", e.target.checked)} />
             Discontinued
           </label>
 
           <div className="flex gap-2">
-            <button className="rounded-xl bg-zinc-900 text-white px-4 py-2 text-sm">Save</button>
-            {!isNew ? <button type="button" className="rounded-xl border px-4 py-2 text-sm" onClick={del}>Delete</button> : null}
+            <button className="admin-btn-primary">Save</button>
+            {!isNew ? <button type="button" className="admin-btn-ghost" onClick={del}>Delete</button> : null}
           </div>
         </div>
       </form>
@@ -223,12 +223,12 @@ export default function ShadeEditor() {
       <ConfirmModal open={confirmState.open} message={confirmState.message} onCancel={() => setConfirmState((s) => ({ ...s, open: false }))} onConfirm={confirmState.onConfirm!} confirmText="ลบเฉดสี" />
 
       {showPrompt ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="w-[360px] max-w-[90vw] rounded-2xl bg-white shadow-2xl border border-zinc-200 p-5">
-            <div className="text-lg font-semibold text-zinc-900">{promptMessage}</div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-sm">
+          <div className="admin-modal">
+            <div className="text-lg font-semibold text-ink">{promptMessage}</div>
             <div className="mt-4 flex justify-end gap-2">
-              <button className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-800 hover:bg-zinc-50" onClick={stayHere}>อยู่ต่อ</button>
-              <button className="rounded-full bg-zinc-900 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-black" onClick={proceedNavigation}>ออกจากหน้านี้</button>
+              <button className="admin-btn-ghost" onClick={stayHere}>อยู่ต่อ</button>
+              <button className="admin-btn-primary" onClick={proceedNavigation}>ออกจากหน้านี้</button>
             </div>
           </div>
         </div>

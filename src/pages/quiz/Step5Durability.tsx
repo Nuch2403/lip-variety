@@ -26,8 +26,9 @@ export default function Step5Durability() {
 
   return (
     <div className="container-page section">
-      <h1 className="text-2xl font-bold mb-3">STEP 5/5 — ความต้องการความติดทนของลิปสติก</h1>
-      <p className="text-zinc-600 mb-6">เลือกได้เพียง 1 ข้อ</p>
+      <span className="eyebrow">STEP 5/5</span>
+      <h1 className="mt-3 font-display text-2xl sm:text-3xl font-semibold text-ink mb-2">ความต้องการความติดทนของลิปสติก</h1>
+      <p className="text-taupe mb-6">เลือกได้เพียง 1 ข้อ</p>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {OPTIONS.map((o) => {
@@ -35,20 +36,20 @@ export default function Step5Durability() {
           return (
             <label
               key={o.code}
-              className={["flex gap-4 rounded-2xl px-6 py-5 border shadow-sm transition cursor-pointer", active ? "border-red-700 ring-2 ring-red-700" : "border-zinc-200 hover:shadow-lg"].join(" ")}
+              className={`card flex gap-4 px-6 py-5 cursor-pointer transition ${active ? "card-selected" : "hover:shadow-md"}`}
             >
               <input
                 type="radio"
                 name="durability"
-                className="h-5 w-5 mt-1 accent-red-700"
+                className="h-5 w-5 mt-1 accent-berry"
                 checked={active}
                 onChange={() => setVal(o.code)}
                 aria-label={o.label}
               />
               <div className="flex flex-col gap-1">
-                <span className="text-lg font-medium">{o.label}</span>
-                {o.hours && <span className="text-sm text-red-700 leading-snug">{o.hours}</span>}
-                {o.desc  && <span className="text-sm text-zinc-600 leading-snug">{o.desc}</span>}
+                <span className="text-lg font-medium text-ink">{o.label}</span>
+                {o.hours && <span className="text-sm text-berry font-medium leading-snug">{o.hours}</span>}
+                {o.desc  && <span className="text-sm text-taupe leading-snug">{o.desc}</span>}
               </div>
             </label>
           );
@@ -56,7 +57,7 @@ export default function Step5Durability() {
       </div>
 
       <div className="mt-8 flex items-center justify-between">
-        <button className="btn-ghost" onClick={() => nav(-1)}>ย้อนกลับ</button>
+        <button className="btn-ghost" onClick={() => nav(-1)}>← ย้อนกลับ</button>
         <button className="btn-primary" disabled={!val} onClick={next}>ดูเฉดที่เหมาะกับฉัน</button>
       </div>
     </div>

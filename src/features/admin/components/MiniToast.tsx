@@ -14,7 +14,7 @@ export default function MiniToast({ message, onClose }: MiniToastProps) {
 
   if (!message) return null;
   return (
-    <div className="fixed bottom-4 right-4 z-50 rounded-2xl border bg-white px-4 py-3 shadow-lg text-sm">
+    <div className="fixed bottom-4 right-4 z-50 rounded-xl border border-berry/10 bg-white px-4 py-3 shadow-lg text-sm text-ink">
       {message}
     </div>
   );

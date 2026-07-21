@@ -31,13 +31,14 @@ export default function TypeOfLipstickPage() {
   }, []);
 
   if (loading) {
-    return <div className="container-page py-10 text-center">กำลังโหลดประเภทลิปสติก...</div>;
+    return <div className="container-page section text-center text-ink/70">กำลังโหลดประเภทลิปสติก...</div>;
   }
 
   return (
-    <div className="container-page py-10">
-      <h1 className="text-2xl font-bold mb-2">ประเภทลิปสติก (TYPE OF LIPSTICK)</h1>
-      <p className="mb-6 text-zinc-600">เลือกประเภทลิปเพื่ออ่านรายละเอียดและคำแนะนำเบื้องต้น</p>
+    <div className="container-page section">
+      <span className="eyebrow">คลังความรู้</span>
+      <h1 className="mt-3 font-display text-2xl sm:text-3xl font-semibold text-ink mb-2">ประเภทลิปสติก</h1>
+      <p className="mb-8 text-taupe">เลือกประเภทลิปเพื่ออ่านรายละเอียดและคำแนะนำเบื้องต้น</p>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {lipTypes.map((t) => {
@@ -48,9 +49,9 @@ export default function TypeOfLipstickPage() {
             <Link
               key={t.code}
               to={`/type/${slug}`}
-              className="group rounded-2xl border bg-white shadow-sm overflow-hidden hover:shadow-md transition"
+              className="group card overflow-hidden hover:shadow-md transition"
             >
-              <div className="aspect-[16/10] bg-zinc-100">
+              <div className="aspect-[16/10] bg-blush">
                 {img ? (
                   <img
                     src={img}
@@ -61,10 +62,10 @@ export default function TypeOfLipstickPage() {
                 ) : null}
               </div>
               <div className="p-4">
-                <div className="font-semibold">{t.name_th}</div>
-                <div className="text-sm text-zinc-600">{t.name_en}</div>
+                <div className="font-semibold text-ink">{t.name_th}</div>
+                <div className="text-sm text-taupe">{t.name_en}</div>
                 {t.short_desc_th ? (
-                  <p className="mt-2 text-sm text-zinc-700 line-clamp-3">{t.short_desc_th}</p>
+                  <p className="mt-2 text-sm text-ink/70 line-clamp-3">{t.short_desc_th}</p>
                 ) : null}
               </div>
             </Link>

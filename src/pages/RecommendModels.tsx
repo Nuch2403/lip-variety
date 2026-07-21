@@ -109,27 +109,28 @@ export default function RecommendModels() {
   }
 
   return (
-    <div className="container-page py-10">
-      <h1 className="text-2xl font-bold mb-2">รุ่นลิปสติกน่าใช้ — คัดให้แล้ว</h1>
-      <p className="text-zinc-600 mb-6">เลือกดูรุ่นลิปจากข้อมูลในฐาน (read-only) และคัดลอกชื่อไปค้นหาได้ทันที</p>
+    <div className="container-page section">
+      <span className="eyebrow">คลังรุ่นทั้งหมด</span>
+      <h1 className="mt-3 font-display text-2xl sm:text-3xl font-semibold text-ink mb-2">รุ่นลิปสติกน่าใช้ — คัดให้แล้ว</h1>
+      <p className="text-taupe mb-8">เลือกดูรุ่นลิปจากข้อมูลในฐาน (read-only) และคัดลอกชื่อไปค้นหาได้ทันที</p>
 
-      <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <select className="rounded-xl border px-3 py-2" value={type} onChange={(e) => setType(e.target.value)}>
+      <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <select className="admin-input" value={type} onChange={(e) => setType(e.target.value)}>
           <option value="">ทั้งหมด (Type)</option>
           {options.types.map((v) => <option key={v} value={v}>{v}</option>)}
         </select>
-        <select className="rounded-xl border px-3 py-2" value={finish} onChange={(e) => setFinish(e.target.value)}>
+        <select className="admin-input" value={finish} onChange={(e) => setFinish(e.target.value)}>
           <option value="">ทั้งหมด (Finish)</option>
           {options.finishes.map((v) => <option key={v.id} value={v.id}>{v.name} ({v.slug})</option>)}
         </select>
-        <select className="rounded-xl border px-3 py-2" value={longevity} onChange={(e) => setLongevity(e.target.value)}>
+        <select className="admin-input" value={longevity} onChange={(e) => setLongevity(e.target.value)}>
           <option value="">ทั้งหมด (Longevity)</option>
           {options.longevity.map((v) => <option key={v} value={v}>{v}</option>)}
         </select>
       </div>
 
-      {loading && <div>กำลังโหลด…</div>}
-      {!loading && err && <div className="rounded-xl border bg-amber-50 p-4 text-amber-900">{err}</div>}
+      {loading && <div className="text-ink/70">กำลังโหลด…</div>}
+      {!loading && err && <div className="rounded-xl border border-gold/30 bg-blush p-4 text-berry">{err}</div>}
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {!loading && !err && list.map((p) => {
@@ -138,27 +139,27 @@ export default function RecommendModels() {
           const isCopied = copiedId === p.id;
 
           return (
-            <div key={p.id} className="rounded-2xl border bg-white shadow-sm overflow-hidden">
-              <div className="aspect-video bg-zinc-100">
+            <div key={p.id} className="card overflow-hidden">
+              <div className="aspect-video bg-blush">
                 {p._img ? <img src={p._img} alt={p.model} className="h-full w-full object-cover" loading="lazy" /> : null}
               </div>
               <div className="p-4">
-                <div className="font-semibold">{p.model}</div>
-                <div className="text-sm text-zinc-600">
+                <div className="font-semibold text-ink">{p.model}</div>
+                <div className="text-sm text-taupe">
                   {brand || "—"} • {p.type_tag}
                   {p.finishes?.name ? ` • ${p.finishes.name}` : p.finish_tag ? ` • ${p.finish_tag}` : ""}
                   {p.longevity_tag ? ` • ${p.longevity_tag}` : ""}
                 </div>
-                <div className="mt-2 text-xs text-zinc-500">จำนวนเฉด: {p._shadeCount}</div>
+                <div className="mt-2 text-xs text-taupe">จำนวนเฉด: {p._shadeCount}</div>
                 <div className="mt-4 flex items-center justify-between gap-3">
                   <button
-                    className="rounded-full border px-3 py-1 text-xs hover:bg-zinc-50"
+                    className="rounded-full border border-taupe/30 px-3 py-1 text-xs text-ink hover:bg-blush transition"
                     onClick={() => copyText(text, p.id)}
                     title={text}
                   >
                     {isCopied ? "คัดลอกแล้ว!" : "คัดลอกชื่อ"}
                   </button>
-                  <span className="text-xs text-zinc-400">id: {p.id}</span>
+                  <span className="text-xs text-taupe">id: {p.id}</span>
                 </div>
               </div>
             </div>

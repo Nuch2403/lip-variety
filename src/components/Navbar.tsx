@@ -15,9 +15,11 @@ function NavItem({ to, children, end = false }: NavItemProps) {
       end={end}
       className={({ isActive }) =>
         [
-          "px-3 py-2 rounded-full text-sm font-medium transition",
-          "hover:bg-zinc-100",
-          isActive ? "bg-zinc-900 text-white" : "text-zinc-800",
+          "relative px-1 py-2 text-sm font-medium transition",
+          "after:absolute after:left-0 after:right-0 after:-bottom-[1px] after:h-[2px] after:rounded-full after:transition-transform",
+          isActive
+            ? "text-berry after:bg-berry after:scale-x-100"
+            : "text-ink/70 hover:text-ink after:bg-gold after:scale-x-0 hover:after:scale-x-100",
         ].join(" ")
       }
     >
@@ -51,15 +53,15 @@ export default function Navbar() {
     <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-zinc-900 text-white px-3 py-2 rounded"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-ink text-cream px-3 py-2 rounded"
       >
         ข้ามไปเนื้อหา
       </a>
 
       <header
         className={[
-          "sticky top-0 z-50 border-b border-zinc-200",
-          "bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60",
+          "sticky top-0 z-50 border-b border-berry/10",
+          "bg-cream/80 backdrop-blur supports-[backdrop-filter]:bg-cream/70",
           scrolled ? "shadow-sm" : "",
         ].join(" ")}
       >
@@ -69,7 +71,7 @@ export default function Navbar() {
               <img src={logoUrl} alt="LipVariety" className="h-10 sm:h-12 w-auto object-contain" />
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-2 ml-6">
+            <nav className="hidden lg:flex items-center gap-7 ml-8">
               <NavItem to="/" end>Home</NavItem>
               <NavItem to="/skintone">Skintone</NavItem>
               <NavItem to="/undertone">Undertone</NavItem>
@@ -85,8 +87,8 @@ export default function Navbar() {
             )}
 
             <button
-              className="ml-auto inline-flex items-center justify-center h-10 w-10 rounded-lg lg:hidden hover:bg-zinc-100"
-              aria-label="เปิดเมนู"
+              className="ml-auto inline-flex items-center justify-center h-10 w-10 rounded-lg lg:hidden hover:bg-blush text-ink"
+              aria-label={open ? "ปิดเมนู" : "เปิดเมนู"}
               aria-expanded={open}
               aria-controls="mobile-nav"
               onClick={() => setOpen((s) => !s)}
@@ -103,13 +105,13 @@ export default function Navbar() {
 
           {step && (
             <div className="pb-3">
-              <div className="flex items-center justify-between text-xs text-zinc-600">
-                <span>{stepLabel}</span>
+              <div className="flex items-center justify-between text-xs text-taupe">
+                <span className="font-medium tracking-wide">{stepLabel}</span>
                 <span className="tabular-nums">{Math.round(progress)}%</span>
               </div>
-              <div className="mt-1 h-1.5 rounded-full bg-zinc-200">
+              <div className="mt-1 h-1.5 rounded-full bg-blush">
                 <div
-                  className="h-full rounded-full bg-brand"
+                  className="h-full rounded-full bg-gradient-to-r from-berry to-gold"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -118,15 +120,15 @@ export default function Navbar() {
         </div>
 
         {open && (
-          <div className="lg:hidden border-t border-zinc-200" id="mobile-nav">
+          <div className="lg:hidden border-t border-berry/10" id="mobile-nav">
             <div className="container-page py-3">
-              <nav className="flex flex-col gap-2">
+              <nav className="flex flex-col gap-1">
                 <NavItem to="/" end>Home</NavItem>
                 <NavItem to="/skintone">Skintone</NavItem>
                 <NavItem to="/undertone">Undertone</NavItem>
                 <NavItem to="/type-of-lipstick">Types of Lipstick</NavItem>
                 {!hideCta && (
-                  <Link to="/quiz/step1-skintone" className="btn-primary mt-1">
+                  <Link to="/quiz/step1-skintone" className="btn-primary mt-2 self-start">
                     Start Quiz
                   </Link>
                 )}

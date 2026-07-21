@@ -44,27 +44,27 @@ export default function FinishesList() {
     <div className="p-5 md:p-6 space-y-4">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <div className="text-xl font-semibold">Finishes</div>
-          <div className="text-sm text-zinc-600">จัดการฟินิชของสินค้า เลือกเปิด/ปิดการใช้งาน</div>
+          <div className="font-display text-xl font-semibold text-ink">Finishes</div>
+          <div className="text-sm text-taupe">จัดการฟินิชของสินค้า เลือกเปิด/ปิดการใช้งาน</div>
         </div>
-        <Link to="/admin/finishes/new" className="rounded-xl bg-zinc-900 text-white px-4 py-2 text-sm hover:opacity-90">
+        <Link to="/admin/finishes/new" className="admin-btn-primary">
           + Create
         </Link>
       </div>
 
       <input
-        className="w-full rounded-xl border px-3 py-2"
+        className="admin-input"
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder="Search name / ชื่อ URL…"
       />
 
-      {loading ? <div className="py-8 text-center text-sm text-zinc-500">Loading...</div> : null}
+      {loading ? <div className="py-8 text-center text-sm text-taupe">Loading...</div> : null}
 
       <div className="mt-4 overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="text-left text-zinc-500">
-            <tr className="border-b">
+          <thead className="text-left text-taupe">
+            <tr className="border-b border-berry/10">
               <th className="py-2 pr-3">Name</th>
               <th className="py-2 pr-3">ชื่อ URL</th>
               <th className="py-2 pr-3">Status</th>
@@ -74,27 +74,27 @@ export default function FinishesList() {
           </thead>
           <tbody>
             {filtered.map((r) => (
-              <tr key={r.id} className="border-b">
-                <td className="py-2 pr-3 font-medium">{r.name}</td>
-                <td className="py-2 pr-3 font-mono text-xs">{r.slug}</td>
+              <tr key={r.id} className="border-b border-berry/10">
+                <td className="py-2 pr-3 font-medium text-ink">{r.name}</td>
+                <td className="py-2 pr-3 font-mono text-xs text-taupe">{r.slug}</td>
                 <td className="py-2 pr-3">
                   <button
-                    className={["text-xs rounded-full border px-3 py-1", r.is_active ? "bg-emerald-50 border-emerald-200" : "bg-zinc-50"].join(" ")}
+                    className={["admin-pill", r.is_active ? "bg-emerald-50 border-emerald-200 text-emerald-800" : "bg-blush border-taupe/20 text-taupe"].join(" ")}
                     onClick={() => toggleActive(r)}
                   >
                     {r.is_active ? "active" : "disabled"}
                   </button>
                 </td>
-                <td className="py-2 pr-3 text-xs text-zinc-500">
+                <td className="py-2 pr-3 text-xs text-taupe">
                   {r.updated_at ? new Date(r.updated_at).toLocaleDateString() : "—"}
                 </td>
                 <td className="py-2 pr-3">
-                  <Link className="text-xs underline" to={`/admin/finishes/${r.id}`}>Edit</Link>
+                  <Link className="text-xs text-berry hover:underline" to={`/admin/finishes/${r.id}`}>Edit</Link>
                 </td>
               </tr>
             ))}
             {!filtered.length ? (
-              <tr><td colSpan={5} className="py-8 text-center text-zinc-500">No finishes found</td></tr>
+              <tr><td colSpan={5} className="py-8 text-center text-taupe">No finishes found</td></tr>
             ) : null}
           </tbody>
         </table>

@@ -171,67 +171,67 @@ export default function ProductEditor() {
     <div className="p-5 md:p-6 space-y-5">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <div className="text-xl font-semibold">{isNew ? "Create Product" : "Edit Product"}</div>
-          <div className="text-sm text-zinc-600">Manage core fields + single cover image.</div>
+          <div className="font-display text-xl font-semibold text-ink">{isNew ? "Create Product" : "Edit Product"}</div>
+          <div className="text-sm text-taupe">Manage core fields + single cover image.</div>
         </div>
         <div className="flex items-center gap-2">
-          <Link className="text-sm underline" to="/admin/products">← กลับรายการ</Link>
-          {!isNew ? <Link className="text-sm underline text-zinc-600" to={`/admin/shades?product=${id}`}>จัดการเฉดสี →</Link> : null}
+          <Link className="text-sm text-berry hover:underline" to="/admin/products">← กลับรายการ</Link>
+          {!isNew ? <Link className="text-sm text-taupe hover:underline" to={`/admin/shades?product=${id}`}>จัดการเฉดสี →</Link> : null}
         </div>
       </div>
 
       <form className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_420px]" onSubmit={save}>
         <div className="space-y-3">
-          <div className="rounded-2xl border p-4 space-y-3">
+          <div className="admin-panel p-4 space-y-3">
             <div>
-              <label className="text-xs text-zinc-600">model</label>
-              <input className="mt-1 w-full rounded-xl border px-3 py-2" value={form.model} onChange={(e) => setField("model", e.target.value)} required />
+              <label className="admin-label">model</label>
+              <input className="admin-input mt-1" value={form.model} onChange={(e) => setField("model", e.target.value)} required />
             </div>
             <div>
-              <label className="text-xs text-zinc-600">brand</label>
-              <select className="mt-1 w-full rounded-xl border px-3 py-2" value={form.brand_id} onChange={(e) => setField("brand_id", e.target.value)} required>
+              <label className="admin-label">brand</label>
+              <select className="admin-input mt-1" value={form.brand_id} onChange={(e) => setField("brand_id", e.target.value)} required>
                 <option value="">Select brand...</option>
                 {brands.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
               </select>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-zinc-600">type_tag</label>
-                <select className="mt-1 w-full rounded-xl border px-3 py-2" value={form.type_tag} onChange={(e) => setField("type_tag", e.target.value)}>
+                <label className="admin-label">type_tag</label>
+                <select className="admin-input mt-1" value={form.type_tag} onChange={(e) => setField("type_tag", e.target.value)}>
                   <option value="">Select type...</option>
                   {lipTypes.map((t) => <option key={t.code} value={t.code}>{t.name_th ?? t.name_en ?? t.code}</option>)}
                 </select>
               </div>
               <div>
-                <label className="text-xs text-zinc-600">finish</label>
-                <select className="mt-1 w-full rounded-xl border px-3 py-2" value={form.finish_id} onChange={(e) => setField("finish_id", e.target.value)}>
+                <label className="admin-label">finish</label>
+                <select className="admin-input mt-1" value={form.finish_id} onChange={(e) => setField("finish_id", e.target.value)}>
                   <option value="">Select finish...</option>
                   {finishes.map((f) => <option key={f.id} value={f.id}>{f.name} ({f.slug})</option>)}
                 </select>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:col-span-2 items-end">
                 <div>
-                  <label className="text-xs text-zinc-600">longevity_tag</label>
-                  <select className="mt-1 w-full rounded-xl border px-3 py-2" value={form.longevity_tag} onChange={(e) => setField("longevity_tag", e.target.value)}>
+                  <label className="admin-label">longevity_tag</label>
+                  <select className="admin-input mt-1" value={form.longevity_tag} onChange={(e) => setField("longevity_tag", e.target.value)}>
                     <option value="">ไม่ระบุ</option>
                     <option value="low">low</option>
                     <option value="medium">medium</option>
                     <option value="high">high</option>
                   </select>
                 </div>
-                <label className="flex items-center gap-3 rounded-xl border px-3 py-2 bg-zinc-50">
-                  <input type="checkbox" className="h-4 w-4 accent-black" checked={!!form.is_discontinued} onChange={(e) => setField("is_discontinued", e.target.checked)} />
+                <label className="flex items-center gap-3 rounded-lg border border-taupe/30 px-3 py-2 bg-blush/40">
+                  <input type="checkbox" className="h-4 w-4 accent-berry" checked={!!form.is_discontinued} onChange={(e) => setField("is_discontinued", e.target.checked)} />
                   <div className="leading-tight">
-                    <div className="text-sm font-medium text-zinc-900">นำออกจากการแนะนำ</div>
-                    <div className="text-[11px] text-zinc-500">(Discontinued)</div>
+                    <div className="text-sm font-medium text-ink">นำออกจากการแนะนำ</div>
+                    <div className="text-[11px] text-taupe">(Discontinued)</div>
                   </div>
                 </label>
               </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button className="rounded-xl bg-zinc-900 text-white px-4 py-2 text-sm hover:opacity-90">Save</button>
-            {!isNew ? <button type="button" className="rounded-xl border px-4 py-2 text-sm" onClick={confirmDelete}>Delete</button> : null}
+            <button className="admin-btn-primary">Save</button>
+            {!isNew ? <button type="button" className="admin-btn-ghost" onClick={confirmDelete}>Delete</button> : null}
           </div>
         </div>
         <div className="space-y-3">
@@ -243,12 +243,12 @@ export default function ProductEditor() {
       <ConfirmModal open={confirmState.open} message={confirmState.message} onCancel={() => setConfirmState((s) => ({ ...s, open: false }))} onConfirm={confirmState.onConfirm!} confirmText="ลบสินค้า" />
 
       {showPrompt ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="w-[360px] max-w-[90vw] rounded-2xl bg-white shadow-2xl border border-zinc-200 p-5">
-            <div className="text-lg font-semibold text-zinc-900">{promptMessage}</div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-sm">
+          <div className="admin-modal">
+            <div className="text-lg font-semibold text-ink">{promptMessage}</div>
             <div className="mt-4 flex justify-end gap-2">
-              <button className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-800 hover:bg-zinc-50" onClick={stayHere}>อยู่ต่อ</button>
-              <button className="rounded-full bg-zinc-900 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-black" onClick={proceedNavigation}>ออกจากหน้านี้</button>
+              <button className="admin-btn-ghost" onClick={stayHere}>อยู่ต่อ</button>
+              <button className="admin-btn-primary" onClick={proceedNavigation}>ออกจากหน้านี้</button>
             </div>
           </div>
         </div>
